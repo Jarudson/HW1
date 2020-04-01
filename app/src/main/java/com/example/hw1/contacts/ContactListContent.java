@@ -1,5 +1,7 @@
 package com.example.hw1.contacts;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.Surface;
 
 import com.example.hw1.R;
@@ -36,6 +38,15 @@ public class ContactListContent {
         }
     }
 
+    public static void removeItem(int position){
+        // Get the id to locate the item in the items map
+        String itemId = ITEMS.get(position).id;
+        // remove the item from List
+        ITEMS.remove(position);
+        // remove the item from map
+        ITEM_MAP.remove(itemId);
+    }
+
     public static void addItem(Contact item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
@@ -49,7 +60,7 @@ public class ContactListContent {
 //*****************************************************
 
 
-    public static class Contact {
+    public static class Contact implements Parcelable {
         public String id;
         private String name;
         private String surname;
@@ -112,6 +123,16 @@ public class ContactListContent {
         @Override
         public String toString() {
             return surname;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -111,9 +112,11 @@ public class AddContact extends AppCompatActivity {
         }
         else {
             if(checkNumber(phoneNumber)){
+                Intent intent = new Intent();
                 Toast.makeText(getApplicationContext(), "New contact added", Toast.LENGTH_SHORT).show();
                 ContactListContent.addItem(new ContactListContent.Contact("Contact" + ContactListContent.ITEMS.size() +1, name, surname, randomizePicture(), date, phoneNumber));
-                ((ContactList) getSupportFragmentManager().findFragmentById(R.id.contactList)).notifyDataChange();
+                setResult(RESULT_OK, intent);
+                //((ContactList) getSupportFragmentManager().findFragmentById(R.id.contactList)).notifyDataChange();
                 finish();
             }
             else {

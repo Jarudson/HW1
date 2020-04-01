@@ -85,10 +85,11 @@ public class ContactList extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListContactClickInteraction {
-        // TODO: Update argument type and name
-        void onListContactClickInteraction(ContactListContent.Contact contact, int position);
-        void onListContactLongClickInteraction(int position);
+        void onListContactClickInteraction(Contact contact, int position);
+        void onListContactLongClickInteraction(Contact contact);
+        void onButtonTrashClick(int position);
     }
+
 
     public void notifyDataChange(){
         mRecyclerViewAdapter.notifyDataSetChanged();

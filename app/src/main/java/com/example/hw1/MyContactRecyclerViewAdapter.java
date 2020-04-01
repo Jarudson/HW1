@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,39 +41,29 @@ public class MyContactRecyclerViewAdapter extends RecyclerView.Adapter<MyContact
         holder.mTextView.setText(mValues.get(position).toString());
         holder.mImView.setImageResource(mValues.get(position).getPicPath());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.mImTrash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListContactClickInteraction(holder.mItem, position);
-                }
+                mListener.onButtonTrashClick(position);
             }
         });
-    }
-/*
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Drawable contactDrawable;
-        Context context = holder.mView.getContext();
-        contactDrawable = context.getResources().getDrawable(R.drawable.avatar1);
-        holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).toString());
-        holder.mImView.setImageDrawable(contactDrawable);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListContactClickInteraction(holder.mItem, position);
-                }
+                mListener.onListContactClickInteraction(holder.mItem, position);
             }
         });
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mListener.onListContactLongClickInteraction(holder.mItem);
+                return false;
+            }
+        });
+
     }
-*/
+
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -82,6 +73,7 @@ public class MyContactRecyclerViewAdapter extends RecyclerView.Adapter<MyContact
         public final View mView;
         public final ImageView mImView;
         public final TextView mTextView;
+        public final ImageButton mImTrash;
         public Contact mItem;
 
         public ViewHolder(View view) {
@@ -89,6 +81,7 @@ public class MyContactRecyclerViewAdapter extends RecyclerView.Adapter<MyContact
             mView = view;
             mImView = (ImageView) view.findViewById(R.id.avatar);
             mTextView = (TextView) view.findViewById(R.id.surname);
+            mImTrash = (ImageButton) view.findViewById(R.id.trash);
         }
 
         @Override

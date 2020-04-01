@@ -14,7 +14,7 @@
         android:layout_marginEnd="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:hint="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Surname"
+        android:hint="@string/surname"
         app:layout_constraintEnd_toEndOf="@+id/editName"
         app:layout_constraintStart_toStartOf="@+id/editName"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
@@ -37,8 +37,8 @@
         android:layout_height="53dp"
         android:layout_marginTop="40dp"
         android:ems="10"
+        android:hint="@string/birthday"
         android:inputType="textPersonName"
-        android:text="DDMMYYYY"
         app:layout_constraintEnd_toEndOf="@+id/editSurname"
         app:layout_constraintStart_toStartOf="@+id/editSurname"
         app:layout_constraintTop_toBottomOf="@+id/editSurname" />
@@ -50,7 +50,7 @@
         android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="PhoneNumber"
+        android:hint="@string/phonenumber"
         app:layout_constraintEnd_toEndOf="@+id/editBirthday"
         app:layout_constraintStart_toStartOf="@+id/editBirthday"
         app:layout_constraintTop_toBottomOf="@+id/editBirthday" />
