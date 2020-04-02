@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/detailInfo"
-        android:name="com.example.hw1.ContactList"
+        android:name="com.example.hw1.ContactInfo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"

@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements
         CallDialog.OnCallDialogInteractionListener
 {
     private int currentItemPosition = -1;
+    private int checkCurrentItemPosition = -1;
     public static final String contactExtra = "contactExtra";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,24 @@ public class MainActivity extends AppCompatActivity implements
         CallDialog.newInstance(contact).show(getSupportFragmentManager(), getString(R.string.call_dialog_tag));
     }
 
+    private void displayContactInFragment(ContactListContent.Contact contact){
+        ContactInfo contactInfo = ((ContactInfo) getSupportFragmentManager().findFragmentById(R.id.detailInfo));
+        if(contactInfo != null){
+            contactInfo.displayContact(contact);
+        }
+    }
+
 
     @Override
     public void onListContactClickInteraction(ContactListContent.Contact contact, int position) {
-        Toast.makeText(getApplicationContext(), "single click", Toast.LENGTH_SHORT).show();
-        startSecondActivity(contact, position);
+        //Toast.makeText(getApplicationContext(), "single click", Toast.LENGTH_SHORT).show();
+        checkCurrentItemPosition = position;
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            displayContactInFragment(contact);
+        }
+        else {
+            startSecondActivity(contact, position);
+        }
     }
 
     @Override
@@ -86,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements
         if(currentItemPosition != -1 && currentItemPosition < ContactListContent.ITEMS.size()){
             ContactListContent.removeItem(currentItemPosition);
             ((ContactList) getSupportFragmentManager().findFragmentById(R.id.contactList)).notifyDataChange();
+            if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && currentItemPosition == checkCurrentItemPosition){
+                displayContactInFragment(null);
+            }
         }
     }
 

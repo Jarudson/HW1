@@ -10,20 +10,19 @@
 
     <TextView
         android:id="@+id/nameInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="100dp"
         app:layout_constraintBottom_toTopOf="@+id/avatarInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
 
     <TextView
         android:id="@+id/surnameInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_width="100dp"
+        android:layout_height="24dp"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/nameInfo"
         app:layout_constraintStart_toEndOf="@+id/nameInfo"
@@ -31,30 +30,33 @@
 
     <ImageView
         android:id="@+id/avatarInfo"
-        android:layout_width="335dp"
-        android:layout_height="340dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:src="@drawable/avatar1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.232" />
 
     <TextView
         android:id="@+id/phoneNumberInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarInfo" />
 
     <TextView
         android:id="@+id/birthdayInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberInfo" />
 

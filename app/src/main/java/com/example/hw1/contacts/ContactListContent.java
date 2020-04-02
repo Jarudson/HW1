@@ -53,7 +53,8 @@ public class ContactListContent {
     }
 
     private static Contact createDummyItem(int position) {
-        return new Contact(String.valueOf(position), "Jarosław", "Gendaszyk", R.drawable.avatar1, 25091997, "123456789");
+        return new Contact(String.valueOf(position), "Jarosław", "Gendaszyk", R.drawable.avatar1, 875138400000L, "123456789");
+        // 875138400000 miliseconds == 25/09/1997
     }
 
 
@@ -65,7 +66,7 @@ public class ContactListContent {
         private String name;
         private String surname;
         private int picPath;
-        private long birthday;
+        private long  birthday;
         private String number;
 
         public Contact(String id, String name, String surname, int picPath, long birthday, String number) {
@@ -84,6 +85,27 @@ public class ContactListContent {
             this.birthday = birthday;
             this.number = number;
         }
+
+        protected Contact(Parcel in) {
+            id = in.readString();
+            name = in.readString();
+            surname = in.readString();
+            picPath = in.readInt();
+            birthday = in.readLong();
+            number = in.readString();
+        }
+
+        public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+            @Override
+            public Contact createFromParcel(Parcel in) {
+                return new Contact(in);
+            }
+
+            @Override
+            public Contact[] newArray(int size) {
+                return new Contact[size];
+            }
+        };
 
         public String getName(){
             return name;
@@ -132,7 +154,12 @@ public class ContactListContent {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-
+            dest.writeString(id);
+            dest.writeString(name);
+            dest.writeString(surname);
+            dest.writeInt(picPath);
+            dest.writeLong(birthday);
+            dest.writeString(number);
         }
     }
 }

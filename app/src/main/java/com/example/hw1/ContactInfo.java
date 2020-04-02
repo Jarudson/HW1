@@ -1,5 +1,6 @@
 package com.example.hw1;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hw1.contacts.ContactListContent;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -33,6 +38,7 @@ public class ContactInfo extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contact_info, container, false);
     }
+    @SuppressLint("SetTextI18n")
     public void displayContact(ContactListContent.Contact contact){
         FragmentActivity activity = getActivity();
 
@@ -43,7 +49,10 @@ public class ContactInfo extends Fragment {
         ImageView avatar = activity.findViewById(R.id.avatarInfo);
         name.setText(contact.getName());
         surname.setText(contact.getSurname());
-        birthday.setText("Birthday: " + contact.getBirthday());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Date date = new Date(contact.getBirthday());
+        String birthTxt = simpleDateFormat.format(date);
+        birthday.setText("Birthday: " + birthTxt);
         phoneNumber.setText("Phone Number: " + contact.getNumber());
         Drawable avatarDrawable;
         avatarDrawable = getActivity().getResources().getDrawable(contact.getPicPath());

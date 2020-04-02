@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,13 +27,15 @@ import java.util.Locale;
 
 public class AddContact extends AppCompatActivity {
     long date;
+    int day;
+    int month;
+    int year;
     ContactListContent contactListContent;
     DatePickerDialog picker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_contact);
-
+            setContentView(R.layout.activity_add_contact);
         final EditText txt3 = findViewById(R.id.editBirthday);
         txt3.setInputType(InputType.TYPE_NULL);
         txt3.setOnClickListener(new View.OnClickListener() {
@@ -40,9 +43,9 @@ public class AddContact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                day = cldr.get(Calendar.DAY_OF_MONTH);
+                month = cldr.get(Calendar.MONTH);
+                year = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 picker = new DatePickerDialog(AddContact.this,
                         new DatePickerDialog.OnDateSetListener() {
@@ -96,6 +99,7 @@ public class AddContact extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void addClick(View view) {
         EditText txt1 = findViewById(R.id.editName);
         EditText txt2 = findViewById(R.id.editSurname);
@@ -104,8 +108,17 @@ public class AddContact extends AppCompatActivity {
 
         String name = txt1.getText().toString();
         String surname = txt2.getText().toString();
-        String birthday = txt3.getText().toString();
         String phoneNumber = txt4.getText().toString();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        date = calendar.getTimeInMillis();
+        Date date_cal = new Date(date);
+        String birthday = simpleDateFormat.format(date);
+        txt3.setText("Birthday: " + birthday);
+
 
         if(name.isEmpty() || surname.isEmpty() || birthday.isEmpty() || phoneNumber.isEmpty()){
             Toast.makeText(getApplicationContext(), "Please input all data", Toast.LENGTH_SHORT).show();
@@ -124,4 +137,5 @@ public class AddContact extends AppCompatActivity {
             }
         }
     }
+
 }
