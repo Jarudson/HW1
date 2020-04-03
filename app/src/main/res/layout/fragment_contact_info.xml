@@ -5,23 +5,22 @@
     android:id="@+id/detailInfo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context=".ContactInfo">
 
 
     <TextView
         android:id="@+id/nameInfo"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginEnd="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/avatarInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/surnameInfo"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/nameInfo"
@@ -30,17 +29,13 @@
 
     <ImageView
         android:id="@+id/avatarInfo"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:adjustViewBounds="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
         android:scaleType="fitXY"
-        android:src="@drawable/avatar1"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintTop_toBottomOf="@+id/nameInfo" />
 
     <TextView
         android:id="@+id/phoneNumberInfo"

@@ -47,17 +47,26 @@ public class ContactInfo extends Fragment {
         TextView birthday = activity.findViewById(R.id.birthdayInfo);
         TextView phoneNumber = activity.findViewById(R.id.phoneNumberInfo);
         ImageView avatar = activity.findViewById(R.id.avatarInfo);
-        name.setText(contact.getName());
-        surname.setText(contact.getSurname());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        Date date = new Date(contact.getBirthday());
-        String birthTxt = simpleDateFormat.format(date);
-        birthday.setText("Birthday: " + birthTxt);
-        phoneNumber.setText("Phone Number: " + contact.getNumber());
-        Drawable avatarDrawable;
-        avatarDrawable = getActivity().getResources().getDrawable(contact.getPicPath());
-        avatar.setImageDrawable(avatarDrawable);
-
+        if(contact == null){
+            name.setText(null);
+            surname.setText(null);
+            birthday.setText(null);
+            phoneNumber.setText(null);
+            avatar.setImageDrawable(null);
+            return;
+        }
+        else {
+            name.setText(contact.getName());
+            surname.setText(contact.getSurname());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            Date date = new Date(contact.getBirthday());
+            String birthTxt = simpleDateFormat.format(date);
+            birthday.setText("Birthday: " + birthTxt);
+            phoneNumber.setText("Phone Number: " + contact.getNumber());
+            Drawable avatarDrawable;
+            avatarDrawable = getActivity().getResources().getDrawable(contact.getPicPath());
+            avatar.setImageDrawable(avatarDrawable);
+        }
 
     }
 

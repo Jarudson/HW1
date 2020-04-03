@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && currentItemPosition == checkCurrentItemPosition){
+            displayContactInFragment(null);
+        }
 
         final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void displayContactInFragment(ContactListContent.Contact contact){
-        ContactInfo contactInfo = ((ContactInfo) getSupportFragmentManager().findFragmentById(R.id.detailInfo));
+        ContactInfo contactInfo = ((ContactInfo) getSupportFragmentManager().findFragmentById(R.id.contactInfo));
         if(contactInfo != null){
             contactInfo.displayContact(contact);
         }
@@ -100,10 +103,10 @@ public class MainActivity extends AppCompatActivity implements
     public void onDeleteDialogPositivieClick(DialogFragment dialog) {
         if(currentItemPosition != -1 && currentItemPosition < ContactListContent.ITEMS.size()){
             ContactListContent.removeItem(currentItemPosition);
-            ((ContactList) getSupportFragmentManager().findFragmentById(R.id.contactList)).notifyDataChange();
             if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && currentItemPosition == checkCurrentItemPosition){
                 displayContactInFragment(null);
             }
+            ((ContactList) getSupportFragmentManager().findFragmentById(R.id.contactList)).notifyDataChange();
         }
     }
 
